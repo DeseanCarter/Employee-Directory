@@ -47,8 +47,6 @@ class Search extends React.Component {
   };
 
   handleInputChange = (event) => {
-    // const name = event.target.name;
-    // const value = event.target.value;
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -83,9 +81,6 @@ class Search extends React.Component {
 
   handleBtnClick = (event) => {
     const btnName = event.target.getAttribute("data-value");
-    // if (btnName === "name") {
-    //   this.sortName()
-    // }
     switch (btnName) {
       case "name":
         this.sortName()
