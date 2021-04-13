@@ -10,18 +10,23 @@ class Search extends React.Component {
   componentDidMount() {
     API.employeeSearch()
       .then((res) => {
+
         console.log(res);
+
+        //Setting State
         this.setState({
-          employees: res.data.results.map((e, i) => ({
-            firstName: e.name.first,
-            lastName: e.name.last,
-            picture: e.picture.large,
-            email: e.email,
-            phone: e.phone,
-            city: e.location.city,
+          employees: res.data.results.map((event, i) => ({
+            firstName: event.name.first,
+            lastName: event.name.last,
+            picture: event.picture.large,
+            email: event.email,
+            phone: event.phone,
+            city: event.location.city,
             key: i,
           })),
+          
         });
+
       })
       .catch((err) => console.log(err));
   }
@@ -41,20 +46,54 @@ class Search extends React.Component {
     this.setState({ employees: filteredList });
   };
 
-  handleInputChange = (e) => {
-    // const name = e.target.name;
-    // const value = e.target.value;
+  handleInputChange = (event) => {
+    // const name = event.target.name;
+    // const value = event.target.value;
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
     console.log('Handling ', this.state.search);
-  };
-
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log('Button Clicked', this.state.search, e);
     this.searchEmployee(this.state.search);
   };
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log('Button Clicked', this.state.search, event);
+    this.searchEmployee(this.state.search);
+  };
+
+  sortName(){
+    console.log(this.state.employees)
+
+    let viewArr = this.state.employees
+    viewArr.sort((a, b) => {
+      let fa = a.firstName.toLowerCase(),
+          fb = b.firstName.toLowerCase();
+  
+      if (fa < fb) {
+          return -1;
+      }
+      if (fa > fb) {
+          return 1;
+      }
+      return 0;
+  });
+  this.setState({employees: viewArr})
+  }
+
+  handleBtnClick = (event) => {
+    const btnName = event.target.getAttribute("data-value");
+    // if (btnName === "name") {
+    //   this.sortName()
+    // }
+    switch (btnName) {
+      case "name":
+        this.sortName()
+          break;  
+        default:
+        return null
+    }
+  }
 
   render() {
     return (
@@ -73,8 +112,8 @@ class Search extends React.Component {
                 <thead>
                   <tr>
                     <th>Photo</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>First Name <img className="caret" onClick={this.handleBtnClick} data-value="name" src="/dot_PNG22.png" alt="acsend-decend"></img></th>
+                    <th>Last Name </th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>City</th>

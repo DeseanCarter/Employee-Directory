@@ -3,5 +3,9 @@
   min-width: 80%;
   margin-right: auto;
   margin-left: auto;
-  
+}
+
+.caret{
+  width: 30x;
+  height: 25px;
 }

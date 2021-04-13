@@ -14,6 +14,8 @@ function SearchForm(props) {
           className="form-control"
           placeholder="Search For Employee"
           id="search"
+          onSubmit={props.handleFormSubmit}
+          
         />
         <button onClick={props.handleFormSubmit} className="btn btn-primary">
           Search
@@ -21,7 +23,6 @@ function SearchForm(props) {
         <button onClick={props.refreshPage} className="btn btn-primary ml-1">
           Reset
         </button>
-        {/* <br /> */}
       </div>
     </form>
   );
