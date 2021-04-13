@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import SearchForm from '../components/SearchForm';
 import API from '../utils/API';
 import '../styles/Table.css';
+import Image from '../dot_PNG22.png'
 
 class Search extends React.Component {
   state = { employees: [], search: '' };
@@ -107,7 +108,7 @@ class Search extends React.Component {
                 <thead>
                   <tr>
                     <th>Photo</th>
-                    <th>First Name <img className="caret" onClick={this.handleBtnClick} data-value="name" src="/dot_PNG22.png" alt="acsend-decend"></img></th>
+                  <th>First Name <img className="caret" onClick={this.handleBtnClick} data-value="name" src={Image} alt="acsend-decend"></img></th>
                     <th>Last Name </th>
                     <th>Email</th>
                     <th>Phone</th>
